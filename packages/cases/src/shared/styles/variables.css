@@ -1,0 +1,23 @@
+:root {
+  /* Colors */
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --color-bg-main: #fff;
+  --color-bg-alt: #f8fafc;
+  --color-bg-tag: #f1f5f9;
+  --color-text-main: #1e293b;
+  --color-text-muted: #64748b;
+  --color-text-light: #94a3b8;
+  --color-accent: #f59e0b;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 32px;
+
+  /* Misc */
+  --radius-m: 8px;
+  --radius-full: 9999px;
+}

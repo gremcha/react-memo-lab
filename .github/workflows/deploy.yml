@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build React 18 App
+        run: pnpm build:18
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/v18/
+
+      - name: Build React 19 App
+        run: pnpm build:19
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/v19/
+
+      - name: Prepare Deployment Directory
+        run: |
+          mkdir -p public_site
+          mv apps/app-react-18/dist public_site/v18
+          mv apps/app-react-19/dist public_site/v19
+          
+          # Create a root index.html that redirects to v19
+          echo "<!DOCTYPE html><html><head><meta http-equiv=\"refresh\" content=\"0; url=/${{ github.event.repository.name }}/v19/\"></head><body>Redirecting to <a href=\"/${{ github.event.repository.name }}/v19/\">React 19 version</a>...</body></html>" > public_site/index.html
+          
+          # Create 404.html for each app to handle client-side routing
+          cp public_site/v18/index.html public_site/v18/404.html
+          cp public_site/v19/index.html public_site/v19/404.html
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public_site

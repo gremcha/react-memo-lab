@@ -1,0 +1,1 @@
+export { generateMockProducts } from './generateProductList';

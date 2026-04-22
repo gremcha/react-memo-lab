@@ -1,0 +1,18 @@
+.page {
+  padding: var(--space-xl);
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.title {
+  margin-bottom: var(--space-m);
+  color: var(--color-text-main);
+}
+
+.description {
+  margin-bottom: var(--space-xl);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
