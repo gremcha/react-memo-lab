@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "moduleDetection": "force",
     "typeRoots": ["./node_modules/@types"],
+    "types": ["react", "react-dom"],
     "paths": {
       "@/*": ["./src/*"],
       "@cases/*": ["./src/*"]
