@@ -7,7 +7,7 @@ interface RouteProps {
   exact?: boolean;
 }
 
-export const Route: FC<RouteProps> = ({ children, exact = true, path }) => {
+export const Route = ({ children, exact = true, path }: RouteProps) => {
   const currentPath = useContext(RouterContext);
 
   const isMatch = exact ? currentPath === path : currentPath.startsWith(path);

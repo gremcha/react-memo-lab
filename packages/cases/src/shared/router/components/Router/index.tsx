@@ -8,7 +8,7 @@ interface RouterProps {
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
 
-export const Router: React.FC<RouterProps> = ({ children }) => {
+export const Router = ({ children }: RouterProps) => {
   const normalizePath = (path: string) => {
     if (BASE_URL && path.startsWith(BASE_URL)) {
       return path.slice(BASE_URL.length) || '/';
