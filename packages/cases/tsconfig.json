@@ -11,7 +11,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "moduleDetection": "force",
-    "typeRoots": ["./node_modules/@types", "../../node_modules/@types"],
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@/*": ["./src/*"],
       "@cases/*": ["./src/*"]

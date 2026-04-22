@@ -6,7 +6,7 @@ interface RouterProps {
   children: ReactNode;
 }
 
-const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '') ?? '';
 
 export const Router = ({ children }: RouterProps) => {
   const normalizePath = (path: string) => {
