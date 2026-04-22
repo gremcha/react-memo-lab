@@ -1,3 +1,4 @@
+import { version } from 'react';
 import { Link, useRouter } from '@cases/shared/router';
 import styles from './styles.module.css';
 
@@ -37,6 +38,21 @@ const SECTIONS = [
 
 export const Navbar = () => {
   const { currentPath } = useRouter();
+  const reactVersion = version.split('.')[0];
+  const is19 = reactVersion === '19';
+
+  const getSwitchUrl = () => {
+    const targetVersion = is19 ? '18' : '19';
+    const targetPort = is19 ? '3018' : '3019';
+
+    if (window.location.port === '3018' || window.location.port === '3019') {
+      return `${window.location.protocol}//${window.location.hostname}:${targetPort}${window.location.pathname}${window.location.search}`;
+    }
+
+    const currentPrefix = `/v${reactVersion}/`;
+    const targetPrefix = `/v${targetVersion}/`;
+    return window.location.href.replace(currentPrefix, targetPrefix);
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -86,6 +102,18 @@ export const Navbar = () => {
             </ul>
           </div>
         ))}
+      </div>
+
+      <div className={styles.footer}>
+        <div className={styles.versionInfo}>
+          Running on <span className={styles.versionBadge}>React {version}</span>
+        </div>
+        <a
+          href={getSwitchUrl()}
+          className={styles.switchButton}
+        >
+          Switch to React {is19 ? '18' : '19'}
+        </a>
       </div>
     </nav>
   );
